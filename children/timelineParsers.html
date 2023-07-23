@@ -1,0 +1,18 @@
+<table border="0" cellspacing="5">
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+<script>
+function FilterByType(parser) {
+	var icon = document.getElementById(parser + "Icon");
+	if (icon.style.backgroundColor == "rgb(255, 255, 255)") {
+		icon.style.backgroundColor = "#A5BCD4";
+		window.parent.postMessage("t" + parser + ":ON", '*');
+	} else {
+		icon.style.backgroundColor = "#FFFFFF";
+		window.parent.postMessage("t" + parser + ":OFF", '*');
+	}
+}
+</script>

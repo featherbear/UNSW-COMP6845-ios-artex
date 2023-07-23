@@ -1,0 +1,428 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link href="../style.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.altShaded {	background-color:#EFEFEF;
+}
+.cell {	font-family:Arial;
+	font-size:12px;
+	border:thin solid #CCCCCC;
+	padding:6px;
+	vertical-align:top;
+	max-width:250px;
+	word-wrap:break-word;
+}
+.header {	background-color:#CCCCCC;
+	height:30px;
+	vertical-align:bottom;
+	font-family:Arial;
+	font-size:16px;
+	border-bottom:medium solid #000000;
+	align:center;
+}
+.header1 {background-color:#CCCCCC;
+	height:30px;
+	vertical-align:bottom;
+	font-family:Arial;
+	font-size:16px;
+	border-bottom:medium solid #000000;
+	align:center;
+}
+.calendar {	font-family:Arial;
+	font-size:12px;
+	color:#000000;
+	border:thin solid #444444;
+}
+.calendarInactive {	color:#AAAAAA;
+}
+.calendarMonth {	background-color:#8A5455;
+	border-bottom:thin solid #000000;
+	color:#FFFFFF;
+	font-weight:bold;
+	padding:4px;
+}
+.header11 {background-color:#CCCCCC;
+	height:30px;
+	vertical-align:bottom;
+	font-family:Arial;
+	font-size:16px;
+	border-bottom:medium solid #000000;
+	align:center;
+}
+.dateHeader {
+	background-color:#CCCCCC;
+	height:40px;
+	vertical-align:bottom;
+	font-family:Arial;
+	font-size:20px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom:thin solid #444444;
+	padding-left:5px;
+}
+</style>
+</head>
+
+<body onload="HideWaitBanner();">
+<table style="height:100%;" height="100%" width="100%" border="0" cellpadding="0" cellspacing="2">
+  <tbody>
+    <tr>
+      <td valign="top" bgcolor="#DBDBDB"><table width="30" border="0" cellpadding="0" class="noPrint">
+        <tbody>
+          <tr>
+            <td><img src="../images/NoGraph.png" style="cursor:pointer;" onMouseDown="HideGraph();" width="30" height="30" alt=""/></td>
+          </tr>
+          <tr>
+            <td><img src="../images/TopGraph.png" style="cursor:pointer;" onMouseDown="TopGraph();" width="30" height="30" alt=""/></td>
+          </tr>
+          <tr>
+            <td><img src="../images/SideGraph.png" style="cursor:pointer;" onMouseDown="SideGraph();" width="30" height="30" alt=""/></td>
+          </tr>
+        </tbody>
+      </table></td>
+      <td style="height:100%;" width="100%" valign="top">
+		  <table height="100%" style="height:100%;" width="100%" border="0">
+        <tbody>
+          <tr id="topGraphRow" style="display:none; height:0px;">
+            <td id="topGraph" colspan="2" valign="top"></td>
+            </tr>
+          <tr>
+			<td height="100%" width="40%" valign="top" id="sideGraph" style="border-right:thin solid #000000;">
+<table width="100%" border="0">
+<tbody>
+<tr>
+<td width="95">
+</td>
+<td width="326" align="center"><span class="graphTitle" id="graphTitle">timeline 1</span></td>
+<td width="100" align="right"><table width="3%" border="0">
+<tbody>
+<tr>
+<td width="84%" id="zoomFactor">1x</td>
+<td width="8%"><img src="../images/btnZoomIn.png" onMouseDown="ZoomInGraph();" width="20" height="20" alt="" style="cursor:pointer;"/></td>
+<td width="8%"><img src="../images/btnZoomOut.png" onMouseDown="ZoomOutGraph();" width="20" height="20" alt="" style="cursor:pointer;"/></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="3" style="overflow:auto;"><img id="graphImage" src="graphs/Timeline 1.png" width="100%" alt=""/></td>
+</tr>
+</tbody>
+</table>
+</td>
+<script>
+var currentGraph = 1;
+var maxGraphs = 1;
+function NextGraph() {
+	if (currentGraph == maxGraphs) {
+	return;	}
+	currentGraph++;
+	if (currentGraph == maxGraphs) {
+		document.getElementById('imgNext').className = 'moreGraphsFalse'
+	}
+		document.getElementById('imgBack').className = 'moreGraphsTrue'
+	document.getElementById('graphImage').src = 'graphs/timeline ' + currentGraph + '.png';
+	document.getElementById('graphTitle').innerHTML = 'timeline ' + currentGraph;
+}
+function PreviousGraph() {
+	if (currentGraph == 1) {
+	return;	}
+	currentGraph--;
+	if (currentGraph == 1) {
+		document.getElementById('imgBack').className = 'moreGraphsFalse'
+	}
+		document.getElementById('imgNext').className = 'moreGraphsTrue'
+	document.getElementById('graphImage').src = 'graphs/timeline ' + currentGraph + '.png';
+	document.getElementById('graphTitle').innerHTML = 'timeline ' + currentGraph;
+}
+</script>
+
+            <td width="60%" valign="top"><table height="100%" width="100%" border="0">
+              <tbody>
+                <tr>
+                  <td><table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-bottom:thin solid #000000;" class="noPrint">
+                    <tbody>
+                      <tr>
+                        <td style="background-color:#CCCCCC;" width="490%" colspan="4"><table width="300" border="0">
+                          <tbody>
+                            <tr>
+                              <td style="display:none;"><table id="btnCalendar" width="120" border="0" cellpadding="0" cellspacing="0" class="toolHeader" onClick="ShowHideCalendars();">
+                                <tbody>
+                                  <tr>
+                                    <td width="24" align="right" style="padding:2px;"><img src="../images/calendar.png" width="20" height="20" alt=""/></td>
+                                    <td width="122">Calendars</td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                              <td><table id="btnDataTypes" width="120" border="0" cellpadding="0" cellspacing="0" class="toolHeader" onClick="ShowHideDataTypes();">
+                                <tbody>
+                                  <tr>
+                                    <td width="24" align="right" style="padding:2px;"><img src="../images/filter.png" width="20" height="20" alt=""/></td>
+                                    <td width="122">Data Types</td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                              <td style="display:none;"><table id="btnFilters" width="120" border="0" cellpadding="0" cellspacing="0" class="toolHeader" onClick="ShowHideFilters();">
+                                <tbody>
+                                  <tr>
+                                    <td width="24" align="right" style="padding:2px;"><img src="../images/filter.png" width="20" height="20" alt=""/></td>
+                                    <td width="122">Filters</td>
+                                    </tr>
+                                  </tbody>
+                                </table></td>
+                              </tr>
+                            </tbody>
+                          </table></td>
+                      </tr>
+                      <tr>
+                        <td colspan="4" valign="top">
+                          <table id="tools" width="100%" border="0">
+                            <tbody>
+                              <tr id="calendars" style="display:none;">
+                                <td><iframe id="calendarsFrame" style="width:100%; height:100%;" frameborder="0" src="timelineCalendars.html"></iframe></td>
+                                </tr>
+                              <tr id="datatypes" style="display:none;">
+                                <td><iframe id="parsersFrame" style="width:100%; height:<parserFrameHeight>px; overflow-x:scroll; overflow-y:visible;" frameborder="0" src="timelineParsers.html"></iframe></td>
+                                </tr>
+                              <tr id="filters" style="display:none;">
+                                <td><table width="100%">
+                                  <tbody>
+                                    <tr>
+                                      <td> Filter by Keyword:
+                                        <input type="text" name="txtFilter" id="txtFilter">
+                                        <input type="button" name="button" id="button" value="Search" onClick="FilterReport();">
+                                        <input type="button" name="button" id="button" value="Clear Filter" onClick="ClearFilter();"></td>
+                                      </tr>
+                                    <tr>
+                                      <td id="resultCount" align="center">&nbsp;</td>
+                                      </tr>
+                                    </tbody>
+                                  </table></td>
+                                </tr>
+                              </tbody>
+                            </table></td>
+                      </tr>
+                    </tbody>
+                  </table></td>
+                </tr>
+                <tr>
+					<td height="100%" valign="top" id="frameHolder">
+						<div align="center" id="waitBanner" style="top:0px;position:fixed;width:100%;height:100%;background-color:rgba(0,0,0,0.6);">
+							<br>
+							<div align="center" style="width:40%;height:100px;background-color:#FFFFFF;border:solid #000000 thin; border-radius:10px;">
+								<br>
+								<img src="../images/ArtEx.png" width="40" alt="" /><br>
+								Loading.
+								Please Wait...
+							</div>
+						</div>
+						<div id="timelineTableFrame" style="width:100%; height:100%;" class="overflow shrink">
+							<table width="100%" border="0">
+<tbody>
+</tbody>
+</table>
+<script>
+var savedColor = "";
+var parsers = [];
+function RollOver(rowIndex) {
+	savedColor = document.getElementById('row_' + rowIndex).style.backgroundColor;
+	document.getElementById('row_' + rowIndex).style.backgroundColor = '#a9bdf6';
+}
+function RollOut(rowIndex) {
+	document.getElementById('row_' + rowIndex).style.backgroundColor = savedColor;
+}
+function ShowHideDate(dateRef) {
+	if (document.getElementById('table_' + dateRef).style.display == '') {
+		document.getElementById('table_' + dateRef).style.display = 'none'; 
+		document.getElementById('link_' + dateRef).innerHTML = 'Show'; 
+	} else{ 
+		document.getElementById('table_' + dateRef).style.display = '';
+		document.getElementById('link_' + dateRef).innerHTML = 'Hide';
+	}
+}
+window.addEventListener('message', function(e) {
+	if (e.data == "print") {
+	TopGraph();
+		print();
+		return;
+	}
+	if (e.data.substring(0,3) == "SHD") {
+		ShowHideDate(e.data.substring(4));	} else {
+		var test = e.data.split(':');
+		if (test[1] == "ON") {
+			parsers.push(test[0]);
+		} else {
+			for( var i = 0; i < parsers.length; i++){
+				if ( parsers[i] === test[0]) {
+					parsers.splice(i, 1);
+				}
+			}
+		}
+	ResetAllRows();
+	parsers.forEach(v => {FilterByType(v);});
+	}
+});
+
+function ResetAllRows() {
+	for (var i = 1; i < 1; i++) {
+		var currentRow = document.getElementById("row_" + i);
+		currentRow.style.display = "none";
+	}
+}
+function FilterByType(type) {
+	var resultCounter = 0
+	var searchTerm = type.toLowerCase();
+	for (var i = 1; i < 1; i++) {
+		var currentRow = document.getElementById("row_" + i);
+		if (currentRow.innerHTML.toLowerCase().indexOf(
+			searchTerm) > -1) {
+			currentRow.style.display = "";
+		}
+	}
+}
+</script>
+
+						</div>
+					</td>
+                </tr>
+              </tbody>
+            </table></td>
+          </tr>
+        </tbody>
+      </table></td>
+    </tr>
+  </tbody>
+</table>
+	<script>
+    function HideWaitBanner() {
+        document.getElementById("waitBanner").style.display = "none";
+    }
+	function HideGraph() {
+		document.getElementById("sideGraph").style.display = "none";
+		document.getElementById("topGraphRow").style.display = "none";
+		document.getElementById("timelineTableFrame").style.height = "100%";
+	}
+	function SideGraph() {
+		document.getElementById("sideGraph").style.display = "";
+		document.getElementById("topGraphRow").style.display = "none";
+		if (document.getElementById("sideGraph").innerHTML == "") {
+			document.getElementById("sideGraph").innerHTML = document.getElementById("topGraph").innerHTML;
+			document.getElementById("topGraph").innerHTML = "";
+		}
+		document.getElementById("timelineTableFrame").style.height = (document.getElementById("frameHolder").scrollHeight - 8) + 'px';
+	}
+	function TopGraph() {
+		document.getElementById("topGraphRow").style.display = "";
+		document.getElementById("sideGraph").style.display = "none";
+		if (document.getElementById("topGraph").innerHTML == "") {
+			document.getElementById("topGraph").innerHTML = document.getElementById("sideGraph").innerHTML;
+			document.getElementById("sideGraph").innerHTML = "";
+		}
+		document.getElementById("timelineTableFrame").style.height = "100%";
+	}
+	function ZoomOutGraph() { 
+		if (document.getElementById('zoomFactor').innerHTML == '3x') {
+			document.getElementById('zoomFactor').innerHTML = '2x'
+			document.getElementById('graphImage').className = 'zoomLevel2';
+		} else if (document.getElementById('zoomFactor').innerHTML == '2x') {
+			document.getElementById('zoomFactor').innerHTML = '1x'
+			document.getElementById('graphImage').className = 'zoomLevel1';
+		}
+	}
+		function ZoomInGraph() { 
+		if (document.getElementById('zoomFactor').innerHTML == '1x') {
+			document.getElementById('zoomFactor').innerHTML = '2x';
+			document.getElementById('graphImage').className = 'zoomLevel2';
+		} else if (document.getElementById('zoomFactor').innerHTML == '2x') {
+			document.getElementById('zoomFactor').innerHTML = '3x'
+			document.getElementById('graphImage').className = 'zoomLevel3';
+		}
+	}
+	function ShowHideDate(dateRef) { 
+		if (document.getElementById('table_' + dateRef).style.display == '') {
+			document.getElementById('table_' + dateRef).style.display = 'none';
+			document.getElementById('link_' + dateRef).innerHTML = 'Show';
+			document.getElementById('cal_' + dateRef).style.backgroundColor = '';
+		} else {
+			document.getElementById('table_' + dateRef).style.display = '';
+			document.getElementById('link_' + dateRef).innerHTML = 'Hide';
+			document.getElementById('cal_' + dateRef).style.backgroundColor = '#22FF22';
+		}
+	}
+	function ShowEntireMonth(yearmonth) { 
+		for (var i=1;i<32;i++) {
+			var dateRef = yearmonth + "_" + i.toString().padStart(2,'0');
+		var elementExists = document.getElementById("table_" + dateRef);
+		if (elementExists) {
+			elementExists.style.display = "";
+			document.getElementById('link_' + dateRef).innerHTML = 'Hide';
+			document.getElementById('cal_' + dateRef).style.backgroundColor = '#22FF22';
+		}
+	}
+}
+	function HideEntireMonth(yearmonth) { 
+		for (var i=1;i<32;i++) {
+			var dateRef = yearmonth + "_" + i.toString().padStart(2,'0');
+		var elementExists = document.getElementById("table_" + dateRef);
+			if (elementExists) {
+				elementExists.style.display = "none";
+				document.getElementById('link_' + dateRef).innerHTML = 'Show';
+				document.getElementById('cal_' + dateRef).style.backgroundColor = '';
+			}
+		}
+	}
+function ShowHideCalendars() { 
+	if (document.getElementById('calendars').style.display == '') {
+		document.getElementById('btnCalendar').className = "toolHeader";
+		document.getElementById('calendars').style.display = 'none';
+	} else {
+		document.getElementById('btnCalendar').className = "toolHeader selectedToolHeader";
+		document.getElementById('calendars').style.display = '';
+	}
+	ResizeFrame();
+}
+function ShowHideFilters() { 
+	if (document.getElementById('filters').style.display == '') {
+		document.getElementById('btnFilters').className = "toolHeader";
+		document.getElementById('filters').style.display = 'none';
+	} else {
+		document.getElementById('btnFilters').className = "toolHeader selectedToolHeader";
+		document.getElementById('filters').style.display = '';
+	}
+	ResizeFrame();
+}
+function ShowHideDataTypes() { 
+	if (document.getElementById('datatypes').style.display == '') {
+		document.getElementById('btnDataTypes').className = "toolHeader";
+		document.getElementById('datatypes').style.display = 'none';
+	} else {
+		document.getElementById('btnDataTypes').className = "toolHeader selectedToolHeader";
+		document.getElementById('datatypes').style.display = '';
+	}
+	ResizeFrame();
+}
+		
+	function ResizeFrame() {
+		document.getElementById("timelineTableFrame").style.height = (window.innerHeight + 10); //(document.getElementById("frameHolder").scrollHeight - 8) + 'px';
+	}
+		
+	ResizeFrame();
+	window.onresize = ResizeFrame;
+	
+	window.addEventListener('message', function(e) {
+		switch (e.data.substring(0,1)) {
+			case "t": //Table
+				self.postMessage(e.data.substring(1), '*');
+				break;
+			case "c": //Calendar
+				document.getElementById("calendarsFrame").contentWindow.postMessage(e.data.substring(1), '*');
+				break;
+		}
+	});
+    </script>
+</body>
+</html>

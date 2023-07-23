@@ -1,0 +1,100 @@
+<!doctype html>
+<html style="height:100%;">
+<head>
+	<meta charset="utf-8">
+	<title>ArtEx Report</title>
+	<style type="text/css">
+	</style>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="height:100%;">
+	<table style="height:100%;" width="100%" border="0">
+		<tbody>
+			<tr>
+				<td height="100">
+					<table width="100%" border="0">
+						<tbody>
+							<tr>
+								<td width="6%" valign="top"><img src="images/ArtEx.png" height="100" alt=""/></td>
+								<td width="94%" valign="bottom">
+									<span style="font-size:small;">ArtEx Version : 2.7.4.0</span>
+								</td>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+			<td style="height:10px;" align="center">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+					<tr>
+								<td width="150" align="center">   <table id="tab_DeviceDetails" class="tab tab_selected" border="0" onMouseDown="ChangeTab('DeviceDetails');">
+									<tbody>
+										<tr>
+											<td width="9%"><img src="images/tabIcons_Device.png" width="24" height="24" alt=""/></td>
+											<td width="91%">Device Details</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+										<td width="150" align="center"><table id="tab_Contacts" width="100%" class="tab tab_unselected" border="0" onMouseDown="ChangeTab('Contacts');">
+											<tbody>
+												<tr>
+													<td align="right"><img src="images/tabIcons_Contacts.png" width="24" height="24" alt=""/></td>
+													<td width="70%">Contacts</td>
+												</tr>
+												</tbody>
+											</table>
+										</td>
+										<td width="150" align="center"><table id="tab_Timeline" width="100%" class="tab tab_unselected" border="0" onMouseDown="ChangeTab('Timeline');">
+											<tbody>
+												<tr>
+													<td align="right"><img src="images/tabIcons_Timeline.png" width="24" height="24" alt=""/></td>
+													<td width="70%">Timeline</td>
+												</tr>
+												</tbody>
+											</table>
+										</td>
+<td width="150" align="center"><table id="tab_Locations" class="tab tab_unselected" width="100%" border="0" onMouseDown="ChangeTab('Locations');">
+<tbody>
+<tr>
+<td align="right"><img src="images/tabIcons_Locations.png" width="24" height="24" alt=""/></td>
+<td width="70%">Locations</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td align="right" style="border-bottom:thin solid #000000;cursor:pointer;"  onclick="document.getElementById('contentFrame').contentWindow.postMessage('print', '*');">Print</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td id="frameHolder" height="100%" valign="top"><iframe id="contentFrame" style="width:100%; overflow-y:scroll;" frameborder="0" src="children/DeviceDetails.html"></iframe></td>
+</tr>
+</tbody>
+</table>
+<script>
+var currentTab = "DeviceDetails";
+window.addEventListener('resize', function(event){
+	UpdateReportView();
+});
+
+function UpdateReportView() {
+	document.getElementById('contentFrame').style.height = (window.innerHeight - 180) + 'px';
+}
+
+function ChangeTab(newTab) {
+	document.getElementById("tab_" + currentTab).className = "tab tab_unselected";
+	document.getElementById("tab_" + newTab).className="tab tab_selected";
+	currentTab = newTab;
+	document.getElementById("contentFrame").src="children/" + currentTab + ".html";
+}
+
+document.getElementById("contentFrame").style.height = (document.getElementById("frameHolder").scrollHeight - 8) + 'px';
+</script>
+</body>
+</html>

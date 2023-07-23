@@ -1,0 +1,33 @@
+<table border="0" cellspacing="5">
+<tbody>
+<tr>
+<td valign="top" style="border:thin solid #CCCCCC; border-radius:5px;">
+<table><tbody><tr><td id="Cache [Cache Locations]Icon" width="80" align="center"  style="border-radius:5px; cursor: pointer; background-color: #A5BCD4;" onMouseDown="FilterByType('Cache [Cache Locations]', '*');"><img src="..\images\Cache [Cache Locations].png"/></td></tr>
+<tr><td align="center" style="font-family:arial; font-size:small; cursor:pointer;" onMouseDown="FilterByType('Cache [Cache Locations]', '*');">Cache [Cache Locations]</td></tr>
+</tbody></table>
+</td>
+<td valign="top" style="border:thin solid #CCCCCC; border-radius:5px;">
+<table><tbody><tr><td id="Cache [Visits]Icon" width="80" align="center"  style="border-radius:5px; cursor: pointer; background-color: #A5BCD4;" onMouseDown="FilterByType('Cache [Visits]', '*');"><img src="..\images\Cache [Visits].png"/></td></tr>
+<tr><td align="center" style="font-family:arial; font-size:small; cursor:pointer;" onMouseDown="FilterByType('Cache [Visits]', '*');">Cache [Visits]</td></tr>
+</tbody></table>
+</td>
+<td valign="top" style="border:thin solid #CCCCCC; border-radius:5px;">
+<table><tbody><tr><td id="Consolidated [GeoFences]Icon" width="80" align="center"  style="border-radius:5px; cursor: pointer; background-color: #A5BCD4;" onMouseDown="FilterByType('Consolidated [GeoFences]', '*');"><img src="..\images\Consolidated [GeoFences].png"/></td></tr>
+<tr><td align="center" style="font-family:arial; font-size:small; cursor:pointer;" onMouseDown="FilterByType('Consolidated [GeoFences]', '*');">Consolidated [GeoFences]</td></tr>
+</tbody></table>
+</td>
+</tr>
+</tbody>
+</table>
+<script>
+function FilterByType(parser) {
+	var icon = document.getElementById(parser + "Icon");
+	if (icon.style.backgroundColor == "rgb(255, 255, 255)") {
+		icon.style.backgroundColor = "#A5BCD4";
+		window.parent.postMessage("t" + parser + ":ON", '*');
+	} else {
+		icon.style.backgroundColor = "#FFFFFF";
+		window.parent.postMessage("t" + parser + ":OFF", '*');
+	}
+}
+</script>

@@ -1,0 +1,152 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+	font-family:Arial;
+	height:100%;
+}
+
+.tab {
+	border:thin solid #000000;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+}
+.tab_unselected {
+	background-color: #22364D;
+	color:#FFFFFF;
+	cursor: pointer;
+}
+.tab_selected {
+	background-color: #FFFFFF;
+	color:#000000;
+	border-bottom:none;
+	cursor: pointer;
+}
+.tab_highlight {
+	background-color: #FFFFFF;
+	color:#000000;
+	border-bottom:thin solid #2A2BB2;
+	cursor: pointer;
+}
+
+.zoomLevel1 {
+	width: 100%;
+	-webkit-transition: all 2s ease;
+	-mo-transition: all 2s ease;
+	-ms-transition: all 2s ease;
+	transition: all 2s ease;
+}
+.zoomLevel2 {
+	width: 150%;
+	-webkit-transition: all 2s ease;
+	-mo-transition: all 2s ease;
+	-ms-transition: all 2s ease;
+	transition: all 2s ease;
+}
+.zoomLevel3 {
+	width: 180%;
+	-webkit-transition: all 2s ease;
+	-mo-transition: all 2s ease;
+	-ms-transition: all 2s ease;
+	transition: all 2s ease;
+}
+.toolHeader {
+	cursor:pointer;
+}
+.selectedToolHeader {
+	background-color:#A5BCD4;
+}
+.graphTitle {
+	font-size:x-large;
+}
+.altShaded {	
+	background-color:#EFEFEF;
+}
+.header {	background-color:#CCCCCC;
+	height:30px;
+	vertical-align:bottom;
+	font-family:Arial;
+	font-size:16px;
+	border-bottom:medium solid #000000;
+	align:center;
+}
+.dateHeader {
+	background-color:#CCCCCC;
+	height:40px;
+	vertical-align:bottom;
+	font-family:Arial;
+	font-size:20px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom:thin solid #444444;
+	padding-left:5px;
+	cursor:pointer;
+}
+.cell {	
+	font-family:Arial;
+	font-size:12px;
+	border:thin solid #CCCCCC;
+	padding:6px;
+	vertical-align:top;
+	max-width:250px;
+	word-wrap:break-word;
+}
+.calendar {	
+	font-family:Arial;
+	font-size:12px;
+	color:#000000;
+	border:thin solid #444444;
+}
+.calendarInactive {	
+	color:#AAAAAA;
+}
+.calendarNoData {	
+	color:#AAAAAA;
+}
+.calendarMonth {	
+	background-color:#8A5455;
+	border-bottom:thin solid #000000;
+	color:#FFFFFF;
+	font-weight:bold;
+	padding:4px;
+}
+.key {
+	color:#565656;
+	font-size:small;
+}
+.source {
+	color:#565656;
+	font-size:x-small;
+}
+
+.moreGraphsTrue {
+	color:#000000;
+	cursor:pointer;
+}
+.moreGraphsFalse {
+	color: #CCCCCC;
+}
+
+@media print {
+	.noPrint {
+		display: none;
+	}
+
+	.shrink {
+		zoom: 75%;
+	}
+
+	.overflow {
+		overflow-y: visible;
+	}
+}
+
+@media screen {
+	.overflow {
+		overflow-y: scroll;
+	}
+}
+
